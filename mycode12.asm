@@ -1,0 +1,36 @@
+;PROGRAM FOR TAKING STRING INPUT AND PRINT THE STRING
+
+.MODEL SMALL
+.STACK 100H
+
+.DATA
+
+msg DB 100 DUP('$')
+
+.CODE
+
+MAIN PROC
+    
+    MOV AX,@DATA
+    MOV DS,AX
+       
+    MOV SI, OFFSET msg
+       
+    L1:
+    MOV AH,1
+    INT 21H
+    CMP AL,13
+    JE PROGRAMEND
+    MOV [SI],AL
+    INC SI
+    JMP L1
+    
+    PROGRAMEND:
+    MOV DX,OFFSET msg
+    MOV AH,9
+    INT 21H
+    MOV AH,4CH
+    INT 21H
+    MAIN ENDP
+
+END MAIN    
